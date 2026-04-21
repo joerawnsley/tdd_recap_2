@@ -15,16 +15,13 @@ jobs:
             with:
               role-to-assume: arn:aws:iam::261219435789:role/ECR-Deploy-JBR
               aws-region: eu-west-2
-              aws-profile-name: jbr-profile
-            
+
           - name: Get Caller Identity
             run: aws sts get-caller-identity
         
           - name: Login to Amazon ECR
             id: login-ecr
             uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
-            env:
-                AWS_PROFILE: jbr-profile
             
           - name: Build, tag, and push docker image to Amazon ECR
             run: |
