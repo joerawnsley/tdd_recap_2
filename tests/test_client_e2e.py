@@ -1,20 +1,28 @@
 from app import app
-import db
+import webbrowser
+from pathlib import Path
+import json
+
+with open('mock_data/duties.json') as duties:
+    mock_duties = json.load(duties)
 
 test_app = app.test_client()
 
-mock_duties = [
-    {"identifier": 1,
-     "description": "Script and Code"},
-    {"identifier": 2,
-     "description": "Deploy Continuously"},
-]
+
 
 def get_home_page(mocker):    
     mocker.patch("db.get_duties", return_value=mock_duties)
     response = test_app.get("/")
     return response
 
+def test_display_home_page(mocker):
+    html_content = get_home_page(mocker).text
+    output_dir = Path("test_output")
+    output_dir.mkdir(exist_ok=True)
+    file_path = output_dir / "home_page_preview.html"
+    file_path.write_text(html_content)
+    webbrowser.open(f"file://{file_path.absolute()}")
+    assert file_path.exists()
 
 def test_home_page_has_page_content(mocker):
     assert "title" in get_home_page(mocker).text
