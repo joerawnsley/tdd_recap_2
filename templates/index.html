@@ -6,9 +6,10 @@
         <title>Document</title>
     </head>
     <body>
+        <h1>Devops Apprenticeship Duties</h1>
         <ul>
             {% for item in duties %}
-                <li>{{ item.description }}</li>
+                <li><a href="{{ item.identifier|string }}">Duty {{item.identifier}}: {{ item.description }}</a></li>
             {% endfor %}
 </ul>
     </body>

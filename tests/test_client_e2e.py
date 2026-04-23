@@ -33,3 +33,12 @@ def test_home_page_contains_duty_1_description(mocker):
 def test_page_is_populated_with_duties_from_db(mocker):
     assert get_home_page(mocker).text.count("li") > 1
     assert "Script and code" in get_home_page(mocker).text
+
+def test_home_page_has_heading(mocker):
+    assert "<h1>Devops Apprenticeship Duties</h1>" in get_home_page(mocker).text
+
+def test_duty_identifiers_are_displayed_on_home_page(mocker):
+    assert "Duty 1:" in get_home_page(mocker).text
+
+def test_list_items_contain_links(mocker):
+    assert "<li><a href=" in get_home_page(mocker).text
