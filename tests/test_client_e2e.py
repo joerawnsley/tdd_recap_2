@@ -3,12 +3,10 @@ import webbrowser
 from pathlib import Path
 import json
 
-with open('mock_data/duties.json') as duties:
-    mock_duties = json.load(duties)
-
 test_app = app.test_client()
 
-
+with open('mock_data/duties.json') as duties:
+    mock_duties = json.load(duties)
 
 def get_home_page(mocker):    
     mocker.patch("db.get_duties", return_value=mock_duties)
