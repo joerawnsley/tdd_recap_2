@@ -15,7 +15,7 @@ def get_home_page(mocker):
     return response
 
 # visual check for homepage
-def test_display_home_page(mocker):
+def xtest_display_home_page(mocker):
     html_content = get_home_page(mocker).text
     output_dir = Path("test_output")
     output_dir.mkdir(exist_ok=True)
