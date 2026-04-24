@@ -2,7 +2,7 @@ from app import app
 import webbrowser
 from pathlib import Path
 import json
-
+from bs4 import BeautifulSoup
 test_app = app.test_client()
 
 # load pages with mocked response
@@ -40,6 +40,11 @@ def test_automate_page_contains_form(mocker):
     assert "<button" in page
     assert "type='submit'" in page or 'type="submit"' in page
     assert "input" in page and "text" in page
+
+def test_duty_number_and_description_fields_in_form(mocker):
+    soup = BeautifulSoup(get_automate_page(mocker).text, "html.parser")
+    assert soup.find_all(name="number") is not None
+    assert soup.find_all(name="description") is not None
 
 # removed tests
 
