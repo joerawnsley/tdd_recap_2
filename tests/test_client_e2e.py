@@ -5,7 +5,7 @@ import json
 
 test_app = app.test_client()
 
-# load page with mocked response
+# load pages with mocked response
 with open('mock_data/duties.json') as duties:
     mock_duties = json.load(duties)
 
@@ -19,8 +19,7 @@ def get_automate_page(mocker):
     response = test_app.get("/automate")
     return response
 
-    
-    
+
 # tests for home page
 def test_home_page_has_page_content(mocker):
     assert "title" in get_home_page(mocker).text
