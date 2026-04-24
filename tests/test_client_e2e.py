@@ -19,7 +19,7 @@ def test_home_page_has_page_content(mocker):
     assert "title" in get_home_page(mocker).text
 
 def test_home_page_has_heading(mocker):
-    assert "<h1>Devops Apprenticeship Duties</h1>" in get_home_page(mocker).text
+    assert "<h1>Devops Apprenticeship Coins</h1>" in get_home_page(mocker).text
 
 def test_home_page_contains_link_to_automate_coin(mocker):
     assert "<a href='automate'>" in get_home_page(mocker).text or '<a href="automate">' in get_home_page(mocker).text
