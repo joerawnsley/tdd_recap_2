@@ -6,13 +6,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-  duties = db.get_duties()
-  return render_template("index.html", duties=duties)
+  coins = db.get_coins()
+  return render_template("index.html", coins=coins)
 
 @app.route('/automate')
 def automate():
-  duties = db.get_duties()
-  return render_template("automate.html", duties=duties)
+  return render_template("automate.html")
 
 
 if __name__ == '__main__':
