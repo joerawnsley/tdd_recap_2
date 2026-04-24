@@ -19,7 +19,6 @@ def get_automate_page(mocker):
     response = test_app.get("/automate")
     return response
 
-
 # tests for home page
 def test_home_page_has_page_content(mocker):
     assert "title" in get_home_page(mocker).text
@@ -34,6 +33,13 @@ def test_home_page_contains_link_to_automate_coin(mocker):
 # tests for automate page
 def test_automate_page_has_heading(mocker):
     assert "<h1>Automate Coin</h1>" in get_automate_page(mocker).text
+
+def test_automate_page_contains_form(mocker):
+    page = get_automate_page(mocker).text
+    assert "<form" in page
+    assert "<button>" in page
+    assert "type='submit'" in page or 'type="submit"' in page
+    assert "input" in page and "text" in page
 
 # removed tests
 
