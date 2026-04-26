@@ -30,4 +30,9 @@ class InMemoryDutyRepository(DutyRepository):
     def save_duty(self, number, description):
         new_duty = dict(number = number, description = description)
         self.duties.append(new_duty)
-
+    
+    def delete_duty_by_number(self, numbers):
+        if type(numbers) == int:
+            self.duties = list(filter(lambda duty: duty["number"] != numbers, self.duties))
+        elif type(numbers) == list:
+            self.duties = list(filter(lambda duty: duty["number"] not in numbers, self.duties))

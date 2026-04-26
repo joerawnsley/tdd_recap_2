@@ -1,13 +1,14 @@
 from db_duties import InMemoryDutyRepository
 import json
 import pytest
+from copy import deepcopy
 
 with open('seed_data/duties.json') as duties:
     seed_data = json.load(duties)
 
 @pytest.fixture
 def duties_repo():
-    duties_repo = InMemoryDutyRepository(seed_data)
+    duties_repo = InMemoryDutyRepository(deepcopy(seed_data))
     return duties_repo
 
 def test_repository_lists_all_duties(duties_repo):
@@ -34,4 +35,18 @@ def test_saving_a_duty_adds_to_repository(duties_repo):
     { "number": 2, "description": "Deploy continuously" },
     { "number": 3, "description": "Automate stuff" },
     { "number": 4, "description": "Respond to changing requirements" }
+    ]
+    
+def test_delete_duty_removes_single_duty_from_repository(duties_repo):
+    duties_repo.delete_duty_by_number(1)
+    assert duties_repo.list_all_duties() == [
+    { "number": 2, "description": "Deploy continuously" },
+    { "number": 3, "description": "Automate stuff" },
 ]
+    
+def test_delete_duty_removes_list_of_duties(duties_repo):
+    duties_repo.delete_duty_by_number([2, 1])
+    assert duties_repo.list_all_duties() == [
+        {"number": 3, "description": "Automate stuff"}
+    ]
+
