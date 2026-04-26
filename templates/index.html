@@ -9,7 +9,7 @@
         <h1>Devops Apprenticeship Coins</h1>
         <ul>
             {% for coin in coins%}
-                <li><a href="{{url_for(coin.render_func)}}" >{{coin.name}}</a></li>
+                <li><a href="{{url_for(coin.id)}}" >{{coin.name}}</a></li>
             {% endfor %}
         </ul>
     </body>
