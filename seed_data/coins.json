@@ -1,6 +1,7 @@
 [
     {
         "name": "Automate!",
-        "render_func": "automate"
+        "id": "automate",
+        "duties": [1, 5, 6, 7, 11, 13]
     }
 ]
