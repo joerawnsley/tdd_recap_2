@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import db
 from db_duties import InMemoryDutyRepository, DatabaseDutyRepository
 from db_coins import InMemoryCoinRepository, DatabaseCoinRepository
@@ -29,6 +29,12 @@ def automate():
 @app.route('/security')
 def security():
   return render_template("security.html")
+
+# dynamic coin route to implement later
+@app.route('/coin/<id>')
+def coin():
+  coin_id = request.args.get('id')
+  return render_template('coin.html', coin_id=coin_id)
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=5000)
