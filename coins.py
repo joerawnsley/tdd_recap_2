@@ -1,11 +1,8 @@
-class Coin:
-    pass
-
 class CoinRepository:
         # superclass for defining how coin repository should behave
     def get_coin_by_name(self, name):
         pass
-    def save_coin(salf, coin: Coin):
+    def save_coin(self, name, id, duties):
         pass
     def delete_coin_by_name(self, name):
         pass
