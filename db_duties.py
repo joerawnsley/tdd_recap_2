@@ -26,4 +26,8 @@ class InMemoryDutyRepository(DutyRepository):
             return list(filter(lambda duty: duty["number"] == numbers, self.duties))
         elif type(numbers) == list:
             return list(filter(lambda duty: duty["number"] in numbers, self.duties))
+    
+    def save_duty(self, number, description):
+        new_duty = dict(number = number, description = description)
+        self.duties.append(new_duty)
 
