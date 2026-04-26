@@ -15,5 +15,6 @@ class DatabaseDutyRepository(DutyRepository):
 
 class InMemoryDutyRepository(DutyRepository):
     # in memory database to be used during development
-    pass
+    def __init__(self, seed_data):
+        self.duties = seed_data
 
