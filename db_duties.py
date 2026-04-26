@@ -18,3 +18,5 @@ class InMemoryDutyRepository(DutyRepository):
     def __init__(self, seed_data):
         self.duties = seed_data
 
+    def list_all_duties(self):
+        return self.duties
