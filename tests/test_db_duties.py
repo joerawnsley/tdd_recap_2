@@ -26,4 +26,12 @@ def test_repository_returns_list_of_duties_by_number(duties_repo):
         { "number": 1, "description": "Script and code" },
         { "number": 3, "description": "Automate stuff" }
         ]
-    
+
+def test_saving_a_duty_adds_to_repository(duties_repo):
+    duties_repo.save_duty(4, "Respond to changing requirements")
+    assert duties_repo.list_all_duties == [
+    { "number": 1, "description": "Script and code" },
+    { "number": 2, "description": "Deploy continuously" },
+    { "number": 3, "description": "Automate stuff" },
+    { "number": 4, "description": "Respond to changing requirements" }
+]

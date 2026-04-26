@@ -2,9 +2,9 @@ class DutyRepository:
     # superclass for defining how duty repository should behave
     def get_duties_by_number(self, numbers):
         pass
-    def save_duty(self, number, description, ksbs):
+    def save_duty(self, number, description):
         pass
-    def delete_duty_by_number(self, number):
+    def delete_duty_by_number(self, numbers):
         pass
     def list_all_duties(self):
         pass
