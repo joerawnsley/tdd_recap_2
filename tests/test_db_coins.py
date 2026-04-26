@@ -22,7 +22,7 @@ def test_save_coin_adds_coin_to_repo(coins_repo):
          {
         "name": "Automate!",
         "id": "automate",
-        "duties": [1, 5, 6, 7, 11, 13]
+        "duties": []
     },
     {
         "name": "Houston, Prepare to Launch",
