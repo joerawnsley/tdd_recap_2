@@ -26,7 +26,10 @@ class InMemoryCoinRepository(CoinRepository):
         self.coins.append(new_coin)
     
     def delete_coin_by_id(self, id):
-        self.coins = list(filter(lambda coin: coin["id"] != id, self.coins)) 
+        self.coins = list(filter(lambda coin: coin["id"] != id, self.coins))
+    
+    def get_coin_by_id(self, id):
+        return list(filter(lambda coin: coin["id"] == id, self.coins))[0]
     
     
     
