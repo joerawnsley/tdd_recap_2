@@ -9,8 +9,9 @@
         <h1>Coin: {{coin.name}}</h1>
         <h2>Duties</h2>
         <ul>
-            <li>Placeholder</li>
-            <li>Placeholder</li>
+            {%for duty in duties%}
+                <li><b>Duty {{duty.number}}:</b> {{duty.description}}</li>
+            {% endfor %}
         </ul>
         <form>
             <p>Please enter a duty for this coin</p>

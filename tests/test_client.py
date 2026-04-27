@@ -103,11 +103,11 @@ def test_houston_page_has_duties(mocker):
         "id": "houston",
         "duties": [5, 7, 10]
     })
-    mocker.patch('db_duties.get_duties_by_number([5, 7, 10])', return_value=[
+    mocker.patch('db_duties.duties_repo.get_duties_by_number', return_value=[
         { "number": 5, "description": "Build and operate" },
         { "number": 7, "description": "Provision cloud infrastructure" },
         { "number": 10, "description": "Implement monitoring" }
     ])
     response = test_app.get("houston")
     assert "<li><b>Duty 5:</b> Build and operate</li>" in response.text
-    assert response.count("<li>") == 3
+    assert response.text.count("<li>") == 3
