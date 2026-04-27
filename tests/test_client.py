@@ -2,6 +2,7 @@ from app import app
 
 test_app = app.test_client()
 
+# ----------------- home page -------------
 def test_home_page_has_content():
     response = test_app.get("/")
     assert "title" in response.text
@@ -78,3 +79,9 @@ def test_home_page_notifies_user_if_coins_not_available(mocker):
     assert "<a href='/automate'" not in response.text and '<a href="/automate"' not in response.text
     assert "There are no coins to display" in response.text
     assert response.text.count("<li>") == 0
+    
+# --------- coin pages ---------
+
+def test_automate_page_has_heading():
+    response = test_app.get("automate")
+    assert "<h1>Coin: Automate!</h1>" in response.text
