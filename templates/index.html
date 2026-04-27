@@ -8,9 +8,13 @@
     <body>
         <h1>Devops Apprenticeship Coins</h1>
         <ul>
-            {% for coin in coins%}
-                <li><a href="{{url_for(coin.id)}}" >{{coin.name}}</a></li>
-            {% endfor %}
+            {% if coins%}
+                {% for coin in coins%}
+                    <li><a href="{{url_for(coin.id)}}" >{{coin.name}}</a></li>
+                {% endfor %}
+            {% else %}
+                <p>There are no coins to display</p>
+            {% endif %}
         </ul>
     </body>
 </html>
