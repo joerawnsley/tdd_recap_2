@@ -10,26 +10,26 @@ def index():
   coins = db_coins.coins_repo.list_all_coins()
   return render_template("index.html", coins=coins)
 
-@app.route('/automate')
-def automate():
-  return render_template("automate.html")
+# @app.route('/automate')
+# def automate():
+#   return render_template("automate.html")
 
-@app.route('/security')
-def security():
-  return render_template("security.html")
+# @app.route('/security')
+# def security():
+#   return render_template("security.html")
 
-@app.route('/houston')
-def houston():
-  return render_template("houston.html")
+# @app.route('/houston')
+# def houston():
+#   return render_template("houston.html")
 
-@app.route('/deeper')
-def deeper():
-  return render_template("deeper.html")
+# @app.route('/deeper')
+# def deeper():
+#   return render_template("deeper.html")
 
-# @app.route('/<coin_id>')
-# def coin(coin_id):
-#   if id:
-#     return render_template("coin.html", coin_id=coin_id)
+@app.route('/<coin_id>')
+def coin(coin_id):
+  if id:
+    return render_template("coin.html", coin_id=coin_id)
 
 # dynamic coin route to implement later
 # @app.route('/coin/<id>')
