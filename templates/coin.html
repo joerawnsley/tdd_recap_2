@@ -13,12 +13,12 @@
                 <li><b>Duty {{duty.number}}:</b> {{duty.description}}</li>
             {% endfor %}
         </ul>
-        <form>
+        <form method="POST">
             <p>Please enter a duty for this coin</p>
             <label for="number">Duty Number</label>
-            <input name="number" type="text">
+            <input name="number" id="number" type="text">
             <label for="description">Description</label>
-            <input name="description" type="text">
+            <input name="description" id="number" type="text">
             <button type="submit">Submit</button>
         </form>
         <a href="../">back</a>
