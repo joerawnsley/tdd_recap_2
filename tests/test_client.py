@@ -27,7 +27,7 @@ def test_home_page_contains_link_to_automate_coin(mocker):
     }
 ])
     response = test_app.get("/")
-    assert "<a href='/automate'" in response.text or '<a href="/automate"' in response.text
+    assert "<a href='/coin/automate'" in response.text or '<a href="/coin/automate"' in response.text
     assert response.text.count("<li>") > 1
 
 def test_number_of_links_on_home_page_matches_number_of_coins(mocker):
@@ -71,8 +71,8 @@ def test_home_page_only_contains_links_to_coins_provided_by_db(mocker):
     }
 ])
     response = test_app.get("/")
-    assert "<a href='/automate'" not in response.text and '<a href="/automate"' not in response.text
-    assert "<a href='/houston'" in response.text or '<a href="/houston"' in response.text
+    assert "<a href='/coin/automate'" not in response.text and '<a href="/coin/automate"' not in response.text
+    assert "<a href='/coin/houston'" in response.text or '<a href="/coin/houston"' in response.text
     assert response.text.count("<li>") > 1
     
 def test_home_page_notifies_user_if_coins_not_available(mocker):
@@ -85,7 +85,7 @@ def test_home_page_notifies_user_if_coins_not_available(mocker):
 # --------- coin pages ---------
 
 def test_automate_page_has_heading():
-    response = test_app.get("automate")
+    response = test_app.get("coin/automate")
     assert "<h1>Coin: Automate!</h1>" in response.text
 
 def test_houston_page_has_heading(mocker):
@@ -94,7 +94,7 @@ def test_houston_page_has_heading(mocker):
         "id": "houston",
         "duties": [5, 7, 10]
     })
-    response = test_app.get("houston")
+    response = test_app.get("coin/houston")
     assert "<h1>Coin: Houston, Prepare to Launch</h1>" in response.text
     
 def test_houston_page_has_duties(mocker):
@@ -108,7 +108,7 @@ def test_houston_page_has_duties(mocker):
         { "number": 7, "description": "Provision cloud infrastructure" },
         { "number": 10, "description": "Implement monitoring" }
     ])
-    response = test_app.get("houston")
+    response = test_app.get("coin/houston")
     assert "<li><b>Duty 5:</b> Build and operate</li>" in response.text
     assert response.text.count("<li>") == 3
     
@@ -116,7 +116,9 @@ def test_houston_page_has_duties(mocker):
 
 def test_form_submit_displays_new_duties(mocker):
     # mocker.patch('db_duties.duties_repo.get_duties_by_number', return_value=[])
-    response = test_app.get("automate")
+    response = test_app.get("coin/automate")
     assert "<li><b>Duty 1:</b> Script and code</li>" not in response.text
-    response = test_app.post("/automate", data={"number": "1", "description": "Script and code"})
+    response = test_app.post("coin/automate", data={"number": "1", "description": "Script and code"})
     assert "<li><b>Duty 1:</b> Script and code</li>" in response.text
+
+# add some tests with mock data here
