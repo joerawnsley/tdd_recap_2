@@ -10,7 +10,7 @@
         <ul>
             {% if coins%}
                 {% for coin in coins%}
-                    <li><a href="{{url_for('coin', coin_id=coin.id)}}" >{{coin.name}}</a></li>
+                    <li><a href="{{url_for('get_coin', coin_id=coin.id)}}" >{{coin.name}}</a></li>
                 {% endfor %}
             {% else %}
                 <p>There are no coins to display</p>
