@@ -32,7 +32,13 @@ class InMemoryDutyRepository(DutyRepository):
     
     def save_duty(self, number, description):
         new_duty = dict(number = number, description = description)
-        self.duties.append(new_duty)
+        update = False
+        for existing_duty in self.duties:
+            if existing_duty["number"] == new_duty["number"]:
+                existing_duty["description"] = new_duty["description"]
+                update = True
+        if not update:
+            self.duties.append(new_duty)
     
     def delete_duty_by_number(self, numbers):
         # delete a single duty when passed a number, or a list of duties when passed a list of numbers

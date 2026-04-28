@@ -50,3 +50,11 @@ def test_delete_duty_removes_list_of_duties(duties_repo):
         {"number": 3, "description": "Automate stuff"}
     ]
 
+def test_saving_a_duty_with_existing_id_updates_the_duty(duties_repo):
+    duties_repo.save_duty(3, "Automate everything!")
+    assert duties_repo.list_all_duties() == [
+    { "number": 1, "description": "Script and code" },
+    { "number": 2, "description": "Deploy continuously" },
+    { "number": 3, "description": "Automate everything!" },
+    ]
+
