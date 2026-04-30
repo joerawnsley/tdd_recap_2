@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Automate!",
+        "id": "automate",
+        "duties": []
+    },
+    {
+        "name": "Call Security",
+        "id": "security",
+        "duties": [1, 2, 3]
+    }
+]
