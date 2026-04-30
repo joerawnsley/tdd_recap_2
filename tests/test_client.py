@@ -1,5 +1,5 @@
 from app import app
-from db_duties import duties_repo, seed_db_in_memory
+from db_duties import duties_repo
 
 # these are integration tests as they test how the app integrates with templates, given a mock resopnse from the db
 
@@ -115,31 +115,36 @@ def test_houston_page_has_duties(mocker):
     
 # ------POST route-----------
 
+# check post route integration with in memory db
 def test_form_submit_displays_new_duties():
     response = test_app.get("coin/automate")
     assert "<li><b>Duty 1:</b> Script and code</li>" not in response.text
     response = test_app.post("coin/automate", data={"number": "1", "description": "Script and code"})
     assert "<li><b>Duty 1:</b> Script and code</li>" in response.text
 
-
-def test_form_submit_updates_duties():
-    response = test_app.get("coin/security")
-    assert "<li><b>Duty 1:</b> Script and code</li>" in response.text
+# patch db functions, check that save_duty was called and simulate the output of the database
+def test_form_submit_updates_duties(mocker):
+    mock_save_duty = mocker.patch("db_duties.duties_repo.save_duty")
+    mocker.patch("db_duties.duties_repo.get_duties_by_number", return_value=[
+            { "number": 1, "description": "Script and script some more" },
+            { "number": 2, "description": "Deploy continuously" },
+            { "number": 3, "description": "Automate stuff" }
+    ])
     response = test_app.post("coin/security", data={"number": "1", "description": "Script and script some more"})
+    mock_save_duty.assert_called_with(1, "Script and script some more")
     assert "<li><b>Duty 1:</b> Script and code</li>" not in response.text
     assert "<li><b>Duty 1:</b> Script and script some more</li>" in response.text
-    duties_repo.save_duty(1, "Script and code")
 
-    
+# triangulation with similar test
 def test_post_route_adds_duty_to_existing_duties(mocker):
-    print("hello")
-    print(duties_repo.list_all_duties())
-    mocker.patch('db_coins.coins_repo.get_coin_by_id', return_value={
-        "name": "Call Security",
-        "id": "security",
-        "duties": [1, 2, 4]
-    })
+    mock_save_duty = mocker.patch("db_duties.duties_repo.save_duty")
+    mocker.patch("db_duties.duties_repo.get_duties_by_number", return_value=[
+            { "number": 1, "description": "Script and code"},
+            { "number": 2, "description": "Deploy continuously" },
+            { "number": 4, "description": "Continuously integrate" }
+    ])
     response = test_app.post("coin/security", data={"number": "4", "description": "Continuously integrate"})
+    mock_save_duty.assert_called_with(4, "Continuously integrate")
     assert "<li><b>Duty 1:</b> Script and code</li>" in response.text
     assert "<li><b>Duty 2:</b> Deploy continuously</li>" in response.text
     assert "<li><b>Duty 3:</b>" not in response.text
