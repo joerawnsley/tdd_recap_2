@@ -55,5 +55,5 @@ jobs:
           - name: Build, tag, and push docker image to Amazon ECR
             run: |
                docker build -t duties-app .
-               docker tag duties-app:latest 261219435789.dkr.ecr.eu-west-2.amazonaws.com/jbr-tdd-recap:latest
-               docker push 261219435789.dkr.ecr.eu-west-2.amazonaws.com/jbr-tdd-recap:latest
+               docker tag duties-app:latest 261219435789.dkr.ecr.eu-west-2.amazonaws.com/jbr/duties-app
+               docker push 261219435789.dkr.ecr.eu-west-2.amazonaws.com/jbr/duties-app
